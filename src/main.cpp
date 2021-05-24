@@ -140,14 +140,14 @@ uint8_t check_time(uint8_t cur_hour, uint8_t cur_min, uint8_t on_hour, uint8_t o
     else{
         if(off_hour<on_hour || (off_hour==on_hour && off_min<on_min)){
            // printf("Case 2");
-            if((cur_hour>=on_hour && cur_min>=on_min)||((cur_hour<off_hour) || (cur_hour==off_hour&&cur_min<off_min))){
-                return 1;
+            if(cur_hour > on_hour) return 1;
+            if(cur_hour < off_hour) return 1;
+            if(cur_hour == on_hour && cur_min >= on_min) return 1;
+            if(cur_hour == off_hour && cur_min < off_min) return 1;
             }
-        }
         /*last case is off_time=on_time*/
         //else printf("case 3");
     }
-    
     if(on_hour==cur_hour && on_min==cur_min){
         return 1;
     }
